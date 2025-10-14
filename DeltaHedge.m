@@ -9,10 +9,10 @@ S0 = 100;
 mu = 0;
 sigma = 0.2;
 %DELTA HEDGING OVER MANY SAMPLES:
-hedges = 1000;
+hedges = 1;
 PnL = zeros(hedges,1); %measure of replication accuracy
 for k=1:hedges
-N = 5000;
+N = 252;
 t = linspace(0,T,N+1);
 S(1) = S0;
 dt = T/N;
@@ -78,3 +78,4 @@ pnl_approximate_deviation = (sqrt(0.25*pi)*blsvega(S0,K,r,T,sigma)*sigma)/(sqrt(
 %the convergence is like sqrt(h)so pretty slow. If you rebalance four times
 %as frequently the deviation of the error is halved.
 % 
+

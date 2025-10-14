@@ -27,9 +27,12 @@ The results of the strategy speaks for themselves through the pictures:
 | **S3** | **C3** |
 
 Due to the fact that the rebalancing is done finitely often the replication is not 100% exact, although remarkably close in both universes. On the first one, the portfolio has turned out to be worth slightly more than the option payoff while the opposite happens in the second realisation. In general, finite rebalancing leads to an unbiased replication error (mean of 0), whose deviation will converge to 0 as the rebalancing frequency increases.
-To examine the range of possibilities, I carried out a Monte Carlo simulation in which I evaluate the outcome of the discrete delta-hedging strategy over 5000 different, randomly generated scenarios of future stock price evolution. The table below summarizes the histograms for the replication error at expiry with two different rebalancing frequencies: the first one every trading day (252 times) and the second one 4 times a day (1008 times). The mean of both is almost 0 and their deviations are about 44 cents and 22 cents. 
+To examine the range of possibilities, I carried out a Monte Carlo simulation in which I evaluate the outcome of the discrete delta-hedging strategy over 5000 different, randomly generated scenarios of future stock price evolution. The table below summarizes the histograms for the replication error at expiry with two different rebalancing frequencies: the first one every trading day (252 times) and the second one 4 times a day (1008 times). The mean of both is almost 0 and their deviations are about 44 cents and 1 cents. 
 
-<img width="700" height="525" alt="H1" src="https://github.com/user-attachments/assets/9c78b2a9-c8e6-4ec4-8225-c220a016a24b" />
+| <img width="700" height="525" alt="H1" src="https://github.com/user-attachments/assets/9c78b2a9-c8e6-4ec4-8225-c220a016a24b" /> | <img width="700" height="525" alt="H2" src="https://github.com/user-attachments/assets/4cc39991-fc57-4d3d-a649-4ccb1498bbcc" /> |
+|:--:|:--:|
+| **H1** | **H2** |
+
 
 
 

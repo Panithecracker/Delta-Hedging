@@ -35,7 +35,7 @@ To examine the range of possibilities, I carried out a Monte Carlo simulation in
 
 
 # Future work:
-After learning what the Black Scholes formula accomplishes and seeing it succeed in the numerical exploration of this project, I have thought of the following questions to continue learning:
+After learning what the Black Scholes formula accomplishes and seeing it succeed in the numerical exploration of this project, I have thought of the following follow-up matters on this interesting topic :
 - Rigorous analysis of the replication error to determine the optimal spread to charge on top of the theoretical price and guarantee no losses with 99% confidence
 - Include transaction costs
 - Test this with other underlying models (Heston, OU process) where there is usually no closed formula for their price

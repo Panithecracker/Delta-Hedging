@@ -1,20 +1,17 @@
-# Delta-Hedging
-In this project I investigated how the black scholes formula corresponds to the cost of constructing a portfolio using the underlying and financing from a bank which replicates the payoff of the option at maturity, independent of the path realised. This idea blew me away when I first heard it, so I wanted to see by myself how this link arises, in the form of numerical evidence in Matlab, aside from the theoretical derivation that can be found on Shreve II.
+# Hedging the risks of an option:
+In this project I investigated the insight behind the Black-Scholes formula: if you know the volatility of a stock then you can replicate the payoff of an option by a continuous rebalancing of a portfolio made up of the underlying stock and a risk-free bond. Therefore, to avoid arbitrage, the cost of the option must be that of the replication strategy.
+This precise idea blew me away when I first heard of it in class, so I first wanted to see by myself the link between the price formula and this powerful theoretical strategy mentioned. To do this, I first read the derivation of the PDE on Shreve II where I gained the right intuition to see how the more realistic discrete-rebalancing strategy naturally follows from. Also, it was very helpful to have previously read about the Binomial model on Shreve I, where the idea of replicating the option is more simply introduced but in a more contrived scenario where stock prices have a binary set of outcomes over a finite amount of time periods. Despite this simplicity, there are surprisingly many parallels, which is why I found this simpler approach so insightful. 
 
-# Key assumptions:
+# Key assumptions
 The main assumptions of the Black Scholes model for option pricing are :
 - The price of a stock is lognormally distributed ($dS/S = \mu dt+\sigma dW)S$ )
 - The interest rate $r$ and volatility $\sigma$ are constant
 - Trading can be done infinitely often
 - Trading is free (no transaction costs)
 
-Despite these key assumptions (all but the third can be dropped) , I find its conclusions remarkable and not at all obvious, giving a systematic and rational framework for a market maker to asses its risk when selling an option and for its overall contribution to the creation of a wide variety of new financial instruments that all participants in the market can use and benefit from.
-# Delta Hedging strategy in plain words: 
-The theory of Black Scholes suggests the following hedging strategy if we relax the third assumption (and perhaps the most unrealistic one too)  :
-0) Sell an option for the price given by the formula plus some extra spread.
-1) Reinvest the money from the option (excluding spread) on buying delta shares of stock and borrow[deposit] money using the bank if necessary.
-2) Repeat step 1) but with the current earnings of the portfolio before expiry every small amount of time before expiration date.
-The goal of this project is to see that this strategy establishes (in practice) an arbitrage opportunity for the writer of the option as the rebalancing frequency is large enough for a fixed nonzero spread.
+Despite these assumptions (all but the third can be dropped) , I find its conclusions remarkable and not at all obvious, giving a systematic and rational framework for a market maker to asses its risk when selling an option and for its overall contribution to the creation of a wide variety of new financial instruments that all participants in the market can use and benefit from.
+In this project, I analyzed the effects of relaxing the third assumption that is: only a finite amount of rebalancing can be done throughout the life of the option.
+For this, I performed simulations of the hedging strategy for a European call option and visualized the statistical distribution of the replication error at maturity.
 # Some results:
 This first table shows how the accuracy of the replication strategy for two realised paths, where the portfolio is rebalanced 200 times across a trading year (about every 30 hours). The specific parameters used for the simulations are $\sigma = 0.2, \mu = 0, r = 0.05, K = S0 = 100, T = 1$
 The results of the strategy speaks for themselves through the pictures:

@@ -40,7 +40,8 @@ There is another model which assumes that prices have only a pair of successive 
 
 # Future work:
 After learning what the Black Scholes formula accomplishes and seeing it succeed in the numerical exploration of this project, I have thought of the following follow-up matters on this interesting topic :
-- Rigorous analysis of the replication error to determine the optimal spread to charge on top of the theoretical price and guarantee no losses with 99% confidence
-- Include transaction costs
-- Test this with other underlying models (Heston, OU process) where there is usually no closed formula for their price
-- Learn about delta-gamma trading
+- Derivation of the replication error to find the minimal bid-ask spread and guarantee no losses with 95% confidence
+- Study model extension to account for transaction costs
+- Use other underlying dynamics like Heston or Orhnstein
+- Learn about delta-gamma strategy and test with real data
+- Explore implicit volatiliy surface

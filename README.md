@@ -12,7 +12,7 @@ The main assumptions of the Black Scholes model for option pricing are :
 Despite these assumptions (all but the third can be dropped) , I find its conclusions remarkable and not at all obvious, giving a systematic and rational framework for a market maker to asses its risk when selling an option and for its overall contribution to the creation of a wide variety of new financial instruments that all participants in the market can use and benefit from.
 In this project, I analyzed the effects of relaxing the third assumption that is: only a finite amount of rebalancing can be done throughout the life of the option.
 For this, I performed simulations of the hedging strategy for a European call option and visualized the statistical distribution of the replication error at maturity.
-# Some results:
+# Option replication :
 This first table shows how the accuracy of the replication strategy for two realised paths, where the portfolio is rebalanced 200 times across a trading year (about every 30 hours). The specific parameters used for the simulations are $\sigma = 0.2, \mu = 0, r = 0.05, K = S0 = 100, T = 1$
 The results of the strategy speaks for themselves through the pictures:
 | <img width="700" height="525" alt="S2" src="https://github.com/user-attachments/assets/5be31613-28a0-4f93-8560-0ac7f3a6ca6f" /> | <img width="700" height="525" alt="C2" src="https://github.com/user-attachments/assets/e3aa21aa-f953-40f6-a9fc-3e0b27b3778f" /> |
@@ -30,8 +30,8 @@ To examine the range of possibilities, I carried out a Monte Carlo simulation in
 |:--:|:--:|
 | **H1** | **H2** |
 
-
-
+# Binomial model contrast: 
+There is another model which assumes that prices have only a pair of successive outcomes (up or down) for a given set of periods. The replication strategy for this model is easy to calculate and it turns out that leads to equivalent conclusions as the Black-Scholes model, in some limiting sense. Here I also implemented this model and verified that indeed the associated pricing surface for a large enough period (number of branches of the tree of prices) is almost identical to the Black-Scholes one. In addition, this scheme is more versatile for replicating path dependent options like American,Asian, Binary,etc and can easily be modified to account for varying volatility and risk free rate. For the details of this model, one can read more in 
 
 
 # Future work:

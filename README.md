@@ -31,7 +31,11 @@ To examine the range of possibilities, I carried out a Monte Carlo simulation in
 | **H1** | **H2** |
 
 # Binomial model contrast: 
-There is another model which assumes that prices have only a pair of successive outcomes (up or down) for a given set of periods. The replication strategy for this model is easy to calculate and it turns out that leads to equivalent conclusions as the Black-Scholes model, in some limiting sense. Here I also implemented this model and verified that indeed the associated pricing surface for a large enough period (number of branches of the tree of prices) is almost identical to the Black-Scholes one. In addition, this scheme is more versatile for replicating path dependent options like American,Asian, Binary,etc and can easily be modified to account for varying volatility and risk free rate. For the details of this model, one can read more in 
+There is another model which assumes that prices have only a pair of successive outcomes (up or down) for a given set of periods. The replication strategy for this model is easy to calculate and it turns out that leads to equivalent conclusions as the Black-Scholes model, in some limiting sense. Here I also implemented this model and verified that indeed the associated pricing surface for a large enough period (number of branches of the tree of prices) is almost identical to the Black-Scholes one. In addition, this scheme is more versatile for replicating path dependent options like American,Asian, Binary,etc and can easily be modified to account for varying volatility and risk free rate. For the details of this model, one can read more in [BinomialNotes](Delta-Hedging/f400n10.pdf)
+
+<img width="1409" height="638" alt="image" src="https://github.com/user-attachments/assets/0d2fa8ae-eea6-49c4-b738-d67c11b10691" />
+
+
 
 
 # Future work:

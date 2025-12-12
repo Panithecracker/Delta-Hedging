@@ -13,7 +13,7 @@ Despite these assumptions (all but the third can be dropped) , I find its conclu
 In this project, I analyzed the effects of relaxing the third assumption that is: only a finite amount of rebalancing can be done throughout the life of the option.
 For this, I performed simulations of the hedging strategy for a European call option and visualized the statistical distribution of the replication error at maturity.
 # Option replication :
-This first table shows how the accuracy of the replication strategy for two realised paths, where the portfolio is rebalanced once a day. The specific parameters used for the simulations are $\sigma = 0.2, \mu = 0, r = 0.05, K = S0 = 100, T = 1$. The replication is not 100% exact, although I hope you agree that it is remarkably close in both universes:
+In the first table I show graphically the accuracy of the replication strategy for two random stock paths, where the portfolio is rebalanced once a day. The specific parameters used for the simulations are $\sigma = 0.2, \mu = 0, r = 0.05, K = S0 = 100, T = 1$. I observed that the replication is not 100% exact, although remarkably close in both instances:
 | <img width="700" height="525" alt="S2" src="https://github.com/user-attachments/assets/73a5f99e-390b-41fa-9fa7-2d4e2916dee6"/> | <img width="700" height="525" alt="C2" src="https://github.com/user-attachments/assets/7ff19d16-31a1-4702-8b5f-34117fc9b6ca" /> |
 |:--:|:--:|
 | **S2** | **C2** |
@@ -26,8 +26,8 @@ This first table shows how the accuracy of the replication strategy for two real
 
 
 
-On the first one, the stock ends at 119.1 $ paying off 19.1$, whereas the portfolio has turned out to be worth slightly more (2.29$). However, the opposite happens in the second realisation, where the portfolio ends up being worth slightly less (0.39$). In general, finite rebalancing leads to an unbiased replication error, whose deviation goes to 0 as the rebalancing frequency increases.
-To examine the range of possibilities, I carried out a Monte Carlo simulation in which I perform discrete delta-hedging strategy over 5000 different, randomly generated stock trajectories. I did this for two different rebalancing frequencies and obtained the following histograms of the replication error : the first one every trading day (252 times) and the second one about every hour (5000 times). 
+On the first path, the stock ends at 119.1 $ paying off 19.1$ to the holder, whereas the portfolio turns out to be worth slightly more (2.29$). However, the opposite happens in the second realisation, where the portfolio ends up being worth slightly less (0.39$). In general, as I observed later, the error is unbiased and its deviation vanishes as the rebalancing frequency increases.
+To see these facts, I carried out a Monte Carlo simulation where I perform the strategy over 100000 randomly generated stock trajectories. I did this for two different rebalancing frequencies and obtained the following histograms for the replication error : the first one every trading day (252 times) and the second one about every hour (5000 times). 
 
 | <img width="700" height="525" alt="H1" src="https://github.com/user-attachments/assets/9c78b2a9-c8e6-4ec4-8225-c220a016a24b" /> | <img width="700" height="525" alt="H2" src="https://github.com/user-attachments/assets/4cc39991-fc57-4d3d-a649-4ccb1498bbcc" /> |
 |:--:|:--:|

@@ -13,23 +13,33 @@ Despite these assumptions (all but the third can be dropped) , I find its conclu
 In this project, I analyzed the effects of relaxing the third assumption that is: only a finite amount of rebalancing can be done throughout the life of the option.
 For this, I performed simulations of the hedging strategy for a European call option and visualized the statistical distribution of the replication error at maturity.
 # Option replication :
-This first table shows how the accuracy of the replication strategy for two realised paths, where the portfolio is rebalanced 200 times across a trading year (about every 30 hours). The specific parameters used for the simulations are $\sigma = 0.2, \mu = 0, r = 0.05, K = S0 = 100, T = 1$
-The results of the strategy speaks for themselves through the pictures:
+This first table shows how the accuracy of the replication strategy for two realised paths, where the portfolio is rebalanced once a day. The specific parameters used for the simulations are $\sigma = 0.2, \mu = 0, r = 0.05, K = S0 = 100, T = 1$. The replication is not 100% exact, although I hope you agree that it is remarkably close in both universes:
 | <img width="700" height="525" alt="S2" src="https://github.com/user-attachments/assets/73a5f99e-390b-41fa-9fa7-2d4e2916dee6"/> | <img width="700" height="525" alt="C2" src="https://github.com/user-attachments/assets/7ff19d16-31a1-4702-8b5f-34117fc9b6ca" /> |
 |:--:|:--:|
 | **S2** | **C2** |
 
-| <img width="700" height="525" alt="S3" src="https://github.com/user-attachments/assets/ddb6b99c-19ce-4eec-9ae4-3d206aa5ede7" /> | <img width="700" height="525" alt="C3" src="https://github.com/user-attachments/assets/bd5c6c1a-4662-461b-9a5f-4b511008ab98" /> |
+| <img width="700" height="525" alt="S3" src="https://github.com/user-attachments/assets/80938f56-b609-42a3-b7d3-95f8747e3065" /> | <img width="700" height="525" alt="C3" src="https://github.com/user-attachments/assets/15691a5e-1dec-482b-817f-3341d3f7a4dd" /> |
 |:--:|:--:|
 | **S3** | **C3** |
 
 
-Due to the fact that the rebalancing is done finitely often the replication is not 100% exact, although remarkably close in both universes. On the first one, the portfolio has turned out to be worth slightly more than the option payoff (2.13 $) while the opposite happens in the second realisation (. In general, finite rebalancing leads to an unbiased replication error (mean of 0), whose deviation will converge to 0 as the rebalancing frequency increases.
-To examine the range of possibilities, I carried out a Monte Carlo simulation in which I evaluate the outcome of the discrete delta-hedging strategy over 5000 different, randomly generated scenarios of future stock price evolution. The table below summarizes the histograms for the replication error at expiry with two different rebalancing frequencies: the first one every trading day (252 times) and the second one about every 1 hour (5000 times). The mean of both is almost 0 and their deviations are about 44 cents and 1 cents. 
+
+
+
+On the first one, the stock ends at 119.1 $ paying off 19.1$, whereas the portfolio has turned out to be worth slightly more (2.29$). However, the opposite happens in the second realisation, where the portfolio ends up being worth slightly less (0.39$). In general, finite rebalancing leads to an unbiased replication error, whose deviation goes to 0 as the rebalancing frequency increases.
+To examine the range of possibilities, I carried out a Monte Carlo simulation in which I perform discrete delta-hedging strategy over 5000 different, randomly generated stock trajectories. I did this for two different rebalancing frequencies and obtained the following histograms of the replication error : the first one every trading day (252 times) and the second one about every hour (5000 times). 
 
 | <img width="700" height="525" alt="H1" src="https://github.com/user-attachments/assets/9c78b2a9-c8e6-4ec4-8225-c220a016a24b" /> | <img width="700" height="525" alt="H2" src="https://github.com/user-attachments/assets/4cc39991-fc57-4d3d-a649-4ccb1498bbcc" /> |
 |:--:|:--:|
 | **H1** | **H2** |
+
+The mean of both is almost 0 and their deviations are about 44 cents and 1 cents.
+
+# Replication portfolio process
+By performing discrete rebalancing, we are in essence approximating the theoretical replication portfolio, whose holdings can change continuously (an object that is plausible on the mathematical world but we cannot cope with in reality) with a real one that is rebalanced finitely often. The reason for the convergence of these discretely rebalanced portfolios is similar to why the euler method converges when solving a classical DE; the error can be bounded by the second derivative of the price with respect to the stock (gamma). The following table shows how the components of the discrete portfolio evolved (stock holdings, cash borrowed/lent) for the second path outlined above. Also, it is accompanied by the $$full$$ hedging error until expiry (the significant time to truly consider from the option seller's perspective)
+![hedge_error](https://github.com/user-attachments/assets/62adaeca-935d-4fb4-9fcb-7184856a8916)
+
+
 
 # Binomial model contrast: 
 There is another model which assumes that prices have only a pair of successive outcomes (up or down) for a given set of periods. The replication strategy for this model is easy to calculate and it turns out that leads to equivalent conclusions as the Black-Scholes model, in some limiting sense. Here I also implemented this model and verified that indeed the associated pricing surface for a large enough period (number of branches of the tree of prices) is almost identical to the Black-Scholes one. In addition, this scheme is more versatile for replicating path dependent options like American,Asian, Binary,etc and can easily be modified to account for varying volatility and risk free rate. For the details of this model, one can read more in [BinomialNotes](f400n10.pdf)

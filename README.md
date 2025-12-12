@@ -15,7 +15,7 @@ For this, I performed simulations of the hedging strategy for a European call op
 # Option replication :
 This first table shows how the accuracy of the replication strategy for two realised paths, where the portfolio is rebalanced 200 times across a trading year (about every 30 hours). The specific parameters used for the simulations are $\sigma = 0.2, \mu = 0, r = 0.05, K = S0 = 100, T = 1$
 The results of the strategy speaks for themselves through the pictures:
-| <img width="700" height="525" alt="S2" src="https://github.com/user-attachments/assets/5be31613-28a0-4f93-8560-0ac7f3a6ca6f" /> | <img width="700" height="525" alt="C2" src="https://github.com/user-attachments/assets/e3aa21aa-f953-40f6-a9fc-3e0b27b3778f" /> |
+| <img width="700" height="525" alt="S2" src="https://github.com/user-attachments/assets/73a5f99e-390b-41fa-9fa7-2d4e2916dee6"/> | <img width="700" height="525" alt="C2" src="https://github.com/user-attachments/assets/7ff19d16-31a1-4702-8b5f-34117fc9b6ca" /> |
 |:--:|:--:|
 | **S2** | **C2** |
 
@@ -23,7 +23,8 @@ The results of the strategy speaks for themselves through the pictures:
 |:--:|:--:|
 | **S3** | **C3** |
 
-Due to the fact that the rebalancing is done finitely often the replication is not 100% exact, although remarkably close in both universes. On the first one, the portfolio has turned out to be worth slightly more than the option payoff while the opposite happens in the second realisation. In general, finite rebalancing leads to an unbiased replication error (mean of 0), whose deviation will converge to 0 as the rebalancing frequency increases.
+
+Due to the fact that the rebalancing is done finitely often the replication is not 100% exact, although remarkably close in both universes. On the first one, the portfolio has turned out to be worth slightly more than the option payoff (2.13 $) while the opposite happens in the second realisation (. In general, finite rebalancing leads to an unbiased replication error (mean of 0), whose deviation will converge to 0 as the rebalancing frequency increases.
 To examine the range of possibilities, I carried out a Monte Carlo simulation in which I evaluate the outcome of the discrete delta-hedging strategy over 5000 different, randomly generated scenarios of future stock price evolution. The table below summarizes the histograms for the replication error at expiry with two different rebalancing frequencies: the first one every trading day (252 times) and the second one about every 1 hour (5000 times). The mean of both is almost 0 and their deviations are about 44 cents and 1 cents. 
 
 | <img width="700" height="525" alt="H1" src="https://github.com/user-attachments/assets/9c78b2a9-c8e6-4ec4-8225-c220a016a24b" /> | <img width="700" height="525" alt="H2" src="https://github.com/user-attachments/assets/4cc39991-fc57-4d3d-a649-4ccb1498bbcc" /> |

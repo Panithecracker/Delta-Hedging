@@ -1,6 +1,6 @@
 # Hedging the risks of an option:
 In this project I investigated the insight behind the Black-Scholes formula: if you know the volatility of a stock then you can replicate the payoff of an option by a continuous rebalancing of a portfolio made up of the underlying stock and a risk-free bond. Therefore, to avoid arbitrage, the cost of the option must be that of the replication strategy.
-This precise idea blew me away when I first heard of it in class, so I first wanted to see by myself the link between the price formula and this powerful theoretical strategy mentioned. To do this, I first read the derivation of the PDE on Shreve II where I gained the right intuition to see how the more realistic discrete-rebalancing strategy naturally follows from. Also, it was very helpful to have previously read about the Binomial model on Shreve I, where the idea of replicating the option is more simply introduced but in a more contrived scenario where stock prices have a binary set of outcomes over a finite amount of time periods. Despite this simplicity, there are surprisingly many parallels, which is why I found this simpler approach so insightful. 
+This precise idea blew me away when I first heard of it in class, so I first wanted to see by myself the link between the price formula and this powerful theoretical strategy in action.  
 
 # Key assumptions
 The main assumptions of the Black Scholes model for option pricing are :

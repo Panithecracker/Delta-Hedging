@@ -33,7 +33,7 @@ To see these facts, I carried out a Monte Carlo simulation where I perform the s
 |:--:|:--:|
 | **H1** | **H2** |
 
-The mean of both is almost 0 and their deviations are about 44 cents and 1 cents.
+The mean of both is almost 0 and their deviations are about 44 cents and 10 cents.
 
 # Replication portfolio process
 By performing discrete rebalancing, we are in essence approximating the theoretical replication portfolio, whose holdings can change continuously (an object that is plausible on the mathematical world but we cannot cope with in reality) with a real one that is rebalanced finitely often. The reason for the convergence of these discretely rebalanced portfolios is similar to why the euler method converges when solving a classical DE; the error can be bounded by the second derivative of the price with respect to the stock (gamma). The following table shows how the components of the discrete portfolio evolved (stock holdings, cash borrowed/lent) for the second path outlined above. Also, it is accompanied by the $$full$$ hedging error until expiry (the significant time to truly consider from the option seller's perspective)

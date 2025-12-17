@@ -55,7 +55,6 @@ I plotted the two price surfaces using the same parameters and for the case of t
 
 
 # Future work:
-After learning what the Black Scholes formula accomplishes and seeing it succeed in the numerical exploration of this project, I have thought of the following follow-up matters on this interesting topic :
 - Derive an explicit formula for the hedge error
 - Account for transaction costs
 - Test against historical data

@@ -1,9 +1,9 @@
 # Hedging the risks of an option:
-In this project I investigated the insight behind the Black-Scholes formula: if you know the volatility of a stock then you can replicate the payoff of an option by a continuous rebalancing of a portfolio made up of the underlying stock and a risk-free bond. Therefore, to avoid arbitrage, the cost of the option must be that of the replication strategy.
+In this project I investigated the insight behind the Black-Scholes-Merton formula: if you know the volatility of a stock then you can replicate the payoff of an option by a continuous rebalancing of a portfolio made up of the underlying stock and a risk-free bond. Therefore, to avoid arbitrage, the cost of the option must be that of the replication strategy.
 This precise idea blew me away when I first heard of it in class, so I wanted to further explore the link between the price and the associated strategy in action.
 
 # Key assumptions
-The main assumptions of the Black Scholes model for option pricing are :
+The main assumptions of the Black-Scholes-Merton model for option pricing are :
 - The price of a stock is lognormally distributed ($dS/S = \mu dt+\sigma dW)S$ )
 - Riskfree rate $r$ and volatility $\sigma$ constant 
 - Arbitrarily high frequency trading is possible
@@ -34,15 +34,17 @@ To see these facts, I carried out a Monte Carlo simulation where I perform the s
 | **H1** | **H2** |
 
 The mean of both is almost 0 and their deviations are about 44 cents and 10 cents.
+From GoldmanSachs quantitative strategies research notes, ![research_notes](https://github.com/user-attachments/assets/62adaeca-935d-4fb4-9fcb-7184856a8916)  they were able to show that the deviation of the error is approximately proportional to $\frac{\kappa\sigma}{\sqrt{N}}$, where $\kappa$ is the first derivative of the price with respect to volatility. The main takeaway is that the convergence is pretty slow with respect to the rebalancing amount $N$; quadrupling the rebalances only halves the deviation of the error. I was able to confirm this result numerically (indeed it holds reasonably well for the above examples where the relative factor should be about 4.45). So the convergence rate of discrete hedging is just like that of crude Monte Carlo for the mean estimation coursed by the factor $1/\sqrt(N)$. 
 
 # Replication portfolio process
-By performing discrete rebalancing, we are in essence approximating the theoretical replication portfolio, whose holdings can change continuously (an object that is plausible on the mathematical world but we cannot cope with in reality) with a real one that is rebalanced finitely often. The reason for the convergence of these discretely rebalanced portfolios is similar to why the euler method converges when solving a classical DE; the error can be bounded by the second derivative of the price with respect to the stock (gamma). The following table shows how the components of the discrete portfolio evolved (stock holdings, cash borrowed/lent) for the second path outlined above. Also, it is accompanied by the $$full$$ hedging error until expiry (the significant time to truly consider from the option seller's perspective)
+By performing discrete rebalancing, we are essentially approximating the theoretical replication portfolio, whose holdings change continuously (an object that is plausible on the mathematical world but we cannot cope with in reality) with one that is rebalanced finitely often (just like we approximating an arbitrary function using a combination of step functions). The reason for the convergence of these discretely rebalanced portfolios is similar to why the euler method converges when solving a classical DE; the error can be bounded by the second derivative of the price with respect to the stock (gamma). The following table shows how the components of the discrete portfolio evolved (stock holdings, cash borrowed/lent at that time) for the second path outlined above. Also, it is accompanied by the $$full$$ hedging error until expiry. Although the value of the error worth considering from a seller perspective is at maturity as it indicates the accuracy of the hedge provided you stayed short until maturity, I thought of an easy improvement on the strategy: if anytime before maturity your portfolio value is enough to buy you the same call then do it. On this way, you instantly hedge your risk from the call you sold and potentially earn more than the fee you charged on top of the BSM price.
+
 ![hedge_error](https://github.com/user-attachments/assets/62adaeca-935d-4fb4-9fcb-7184856a8916)
 
 
 
 # Binomial model contrast: 
-There is another model which assumes that prices have only a pair of successive outcomes (up or down) for a given set of periods. The replication strategy for this model is easy to calculate and it turns out that leads to equivalent conclusions as the Black-Scholes model, in some limiting sense. Here I also implemented this model and verified that indeed the associated pricing surface for a large enough period (number of branches of the tree of prices) is almost identical to the Black-Scholes one. In addition, this scheme is more versatile for replicating path dependent options like American,Asian, Binary,etc and can easily be modified to account for varying volatility and risk free rate. For the details of this model, one can read more in [BinomialNotes](f400n10.pdf)
+There is another model which assumes that prices have only a pair of successive outcomes (up or down) for a given set of periods. The replication strategy for this model is easy to calculate and it turns out that leads to equivalent conclusions as the BSM model, in some limiting sense. Here I also implemented this model and verified that indeed the associated pricing surface for a large enough period (number of branches of the tree of prices) is almost identical to the BSM one. In addition, this scheme is more versatile for replicating path dependent options like American,Asian, Binary,etc and can easily be modified to account for varying volatility and risk free rate. For the details of this model, one can read more in [BinomialNotes](f400n10.pdf)
 
 <img width="1409" height="638" alt="image" src="https://github.com/user-attachments/assets/0d2fa8ae-eea6-49c4-b738-d67c11b10691" />
 

@@ -50,7 +50,7 @@ There is another model which assumes that prices only evolve through a binary tr
 
 
 <img width="1409" height="638" alt="image" src="https://github.com/user-attachments/assets/0d2fa8ae-eea6-49c4-b738-d67c11b10691" />
-
+I plotted the two price surfaces using the same parameters and for the case of the binomial interpolated in between. The graphical difference is negligible.
 
 
 

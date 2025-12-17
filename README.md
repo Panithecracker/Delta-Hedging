@@ -4,10 +4,10 @@ This precise idea blew me away when I first heard of it in class, so I wanted to
 
 # Key assumptions
 The main assumptions of the Black-Scholes-Merton model for option pricing are :
-- The price of a stock is lognormally distributed ($dS/S = \mu dt+\sigma dW)S$ )
+- The price of a stock is lognormal or equivalently, $dS = \mu Sdt+\sigma S dW$ 
 - Riskfree rate $r$ and volatility $\sigma$ constant 
 - Arbitrarily high frequency trading is possible
-- No transaction costs
+- No transaction costs nor bid/ask spread
 
 Despite these assumptions (all but the third can be dropped) , I find its conclusions remarkable and not at all obvious, giving a systematic and rational framework for a market maker to asses its risk when selling an option and for its overall contribution to the creation of a wide variety of new financial instruments that all participants in the market can use and benefit from.
 In this project, I analyzed the effects of relaxing the third assumption that is: only a finite amount of rebalancing can be done throughout the life of the option.

@@ -43,8 +43,9 @@ By performing discrete rebalancing, we are essentially approximating the theoret
 
 
 
-# Binomial model contrast: 
-There is another model which assumes that prices have only a pair of successive outcomes (up or down) for a given set of periods. The replication strategy for this model is easy to calculate and it turns out that leads to equivalent conclusions as the BSM model, in some limiting sense. Here I also implemented this model and verified that indeed the associated pricing surface for a large enough period (number of branches of the tree of prices) is almost identical to the BSM one. In addition, this scheme is more versatile for replicating path dependent options like American,Asian, Binary,etc and can easily be modified to account for varying volatility and risk free rate. For the details of this model, one can read more in [BinomialNotes](f400n10.pdf)
+# The Binomial model and its equivalence: 
+There is another model which assumes that prices only evolve through a binary tree corresponding to up and down moves for a given set of periods (corresponding to the tree depth). The replication strategy for this model is easy to calculate and it turns out that leads to equivalent conclusions as the BSM model, in some limiting sense and with the right choice of up/down factors. Here I also implemented this model and verified that indeed the associated pricing surface for a large enough period (number of branches of the tree of prices) is almost identical to the BSM one. In addition, this scheme is more versatile for replicating path dependent options and can easily be modified to account for a varying volatility and risk free rate. For the details of this model, one can read more in [BinomialNotes](f400n10.pdf)
+
 
 <img width="1409" height="638" alt="image" src="https://github.com/user-attachments/assets/0d2fa8ae-eea6-49c4-b738-d67c11b10691" />
 
@@ -53,9 +54,11 @@ There is another model which assumes that prices have only a pair of successive 
 
 # Future work:
 After learning what the Black Scholes formula accomplishes and seeing it succeed in the numerical exploration of this project, I have thought of the following follow-up matters on this interesting topic :
-- Derive the distribution of the error and use its deviation to obtain a tight bid-ask spread while ensuring no losses with high confidence
-- Extend the model to include transaction costs
-- Backtest with historical data
-- Learn about other strategies like delta-gamma
-- Use Pdes integrators for more complex models like Heston
+- Derive an explicit formula for the hedge error
+- Account for transaction costs
+- Test against historical data
+- Learn how to analyse and derive other hedging strategies like Gamma hedging
+- Explore local volatility and stochastic volatility models
+- Learn how to model the risk free rate
+
 

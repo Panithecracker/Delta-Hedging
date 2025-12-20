@@ -2,17 +2,17 @@ clear all
 clc
 format long
 % option parameters:
-T = 1;
-K = 100;
-r = 0.05;
+T = 2;
+K = 1;
 type = 0;
-%stock parameters (GBM):
-S0 = 100;
+%underlying dynamics parameters (GBM):
+S0 = 1;
 mu = 0;
 sigma = 0.5;
+r = 0.05;
 %DELTA HEDGING OVER MANY SAMPLES:
-hedges = 1;
-N = 200; %hourly trading for a year
+hedges = 1000;
+N = 128; %hourly trading for a year
 t = linspace(0,T,N+1);
 S(1) = S0;
 dt = T/N;
@@ -37,26 +37,31 @@ dW = sigma*sqrt(dt)*randn(N,1); %precompute wiener increments
 for i = 1:N
     %rebalance portfolio using its own wealth (self-financing) N times
     %before expiry.
-    S(i+1) = S(i) * exp((mu - 0.5*sigma^2)*dt + dW(i)); %update price path with using exact solution of GBM model
     [dcall,dput] = blsdelta(S(i),K,r,T-t(i),sigma); % buy delta shares at current price and hold them during [t,t+dt)
-    [call,put] = blsprice(S(i+1),K,r,T-t(i+1),sigma); %exact option price for next time
     if type == 0
         delta = dcall;
-        option(i+1) = call;
     else
         delta = dput;
-        option(i+1) = put;
     end
-    borrow = delta*S(i)-portfolio(i); %use bank to borrow[deposit] the remaining[extra] cash
+    borrow = delta*S(i)-portfolio(i); %use bank to borrow/deposit remaining/extra cash
     %store portfolio information (share holdings and cash balance)
     stock(i) = delta;
     cash(i) = (-1)*borrow;
-    %update portfolio value in the next step based on price change and borrow rate
+    %next option and portfolio prices based on stocks orice change 
+    S(i+1) = S(i) * exp((mu - 0.5*sigma^2)*dt + dW(i)); %update price path with using exact solution of GBM model
+    [call,put] = blsprice(S(i+1),K,r,T-t(i+1),sigma); %exact option price for next time
+    if type == 0
+        option(i+1) = call;
+    else
+        option(i+1) = put;
+    end
+    %update portfolio value in the next step based on price change and r
     portfolio(i+1) = delta*S(i+1)-exp(r*dt)*borrow;
-    replication_error(i+1) = portfolio(i+1) - option(i+1); 
+    replication_error(i+1) = portfolio(i+1) - option(i+1); %track current error 
 end
 pnl_approximate_deviation = (sqrt(0.25*pi)*blsvega(S0,K,r,T,sigma)*sigma)/(sqrt(N)); %approx std of error is prop to option vega at start 
-spread = max(1,2*pnl_approximate_deviation); %extra fee to charge on top of the theoretical price 
+% spread = max(1,2*pnl_approximate_deviation); %extra fee to charge on top of the theoretical price 
+spread = 0;
 PnL_writer(k) = spread+portfolio(end)-option(end);
 PnL_buyer(k) = option(end)-spread-option(1);
 if k == 1 %show specific data of first one only   
@@ -231,5 +236,4 @@ price = V(1);
 % price = exp(-r*T) * price;
 % delta = 0;
 end
-
 

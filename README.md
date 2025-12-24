@@ -46,7 +46,7 @@ By performing discrete rebalancing, we are essentially approximating the theoret
 
 
 
-# The Binomial model and its equivalence: 
+# The Binomial model comparison: 
 The Binomial model is a simpler model which assumes that prices only evolve through a binary tree corresponding to up and down moves for a discrete set of periods (corresponding to the tree depth). The replication strategy in this model is easy to calculate by solving a linear system of equations and leads to the same conclusions as the BSM model, if the number of periods goes to infinity and with the right choice of up/down factors. I also implemented this pricing model and verified this equivalence numerically, by plotting the interpolated pricing surface obtained from a large tree of prices and comparing it with the BSM one (see figure below). In addition, this scheme is more versatile for replicating path dependent options and can easily be modified to account for a varying volatility and risk free rate. For the details of this model and the mathematical proof of its equivalence to the BSM model I read the following notes:  [BinomialNotes](f400n10.pdf)
 
 
@@ -58,8 +58,8 @@ I plotted the two price surfaces using the same parameters and for the case of t
 # Future work:
 - Derive an explicit formula for the hedge error
 - Account for transaction costs
-- Test against historical data
-- Learn how to analyse and derive other hedging strategies like Gamma hedging
+- Test with historical data
+- Learn higher order hedging strategies like Delta-Gamma hedging
 - Explore local volatility and stochastic volatility models
 - Learn how to model the risk free rate
 

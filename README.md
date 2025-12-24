@@ -14,7 +14,8 @@ As Robert.C Merton puts it : "It gave us a prescription for how to produce them 
 
 In this project, I analyzed the effects of relaxing the third assumption that is: only a finite amount of rebalancing can be done throughout the life of the option.
 For this, I performed simulations of the hedging strategy for a European call option and visualized the statistical distribution of the replication error at maturity.
-For the details on the derivation of the BSM formula and its link to the replication strategy as well as other interesting information, check this notes from Columbia's Foundations of Financial Engineering course: ![research_notes](BlackScholes.pdf)
+For the details on the derivation of the BSM formula and its link to the replication strategy as well as other interesting information, check the contents of from Columbia's Foundations of Financial Engineering course: ![IEOR E4706: Foundations of Financial Engineering
+](https://martin-haugh.github.io/teaching/foundations-fe/)
 # Option replication :
 In the first table I show graphically the accuracy of the replication strategy for two random stock paths, where the portfolio is rebalanced once a day. The specific parameters used for the simulations are $\sigma = 0.2, \mu = 0, r = 0.05, K = S0 = 100, T = 1$. I observed that the replication is not 100% exact, although remarkably close in both instances:
 | <img width="700" height="525" alt="S2" src="https://github.com/user-attachments/assets/73a5f99e-390b-41fa-9fa7-2d4e2916dee6"/> | <img width="700" height="525" alt="C2" src="https://github.com/user-attachments/assets/7ff19d16-31a1-4702-8b5f-34117fc9b6ca" /> |

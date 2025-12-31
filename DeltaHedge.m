@@ -5,14 +5,14 @@ format long
 T = 1; %time to maturity
 K = 100; %strike
 type = 0; %call(0),put(1)
-%underlying dynamics parameters (GBM):
+%underlying dynamics parameters (GBM)
 S0 = 100; %spot price
 mu = 0; %drift
 sigma_real = 0.5; %realized volatility
-r = 0.05; %riskfree rate
+r = 0.05; %riskfree rate in the market
 %DELTA HEDGING OVER MANY SAMPLES:
-hedges = 1; 
-N = 1000; %hourly trading for a year
+hedges = 100; 
+N = 252; %partition order
 t = linspace(0,T,N+1);
 S(1) = S0;
 dt = T/N;
@@ -25,38 +25,22 @@ for k=1:hedges
 %by borrowing/lending. Let us see if the payoff of the option is the same
 %as the portfolio at the end.
 option = zeros(N+1,1); %option portfolio history through [0,T]
-[call,put]= blsprice(S0,K,r,T,sigma_imp);
-if type == 0
-    option(1) = call;
-else
-    option(1) = put;
-end
+option(1) = GBM_price(S0,K,r,T,sigma_imp,type);
 portfolio = zeros(N+1,1); %replicating portfolio history through [0,T]
 portfolio(1) = option(1);
 replication_error = zeros(N+1,1); %replication error history (most important is the last)
-dW = sigma_real*sqrt(dt)*randn(N,1); %precompute wiener increments
+S = GBM_path(S0,mu,sigma_real,T,N); %random price path (GBM process)
+% S = OU_path(S0,115,1,sigma_real,T,N); %random price path (OU process)
 for i = 1:N
     %rebalance portfolio using its own wealth (self-financing) N times
     %before expiry.
-    [dcall,dput] = blsdelta(S(i),K,r,T-t(i),sigma_imp); % buy delta shares at current price and hold them during [t,t+dt)
-    if type == 0
-        delta = dcall;
-    else
-        delta = dput;
-    end
+    delta = GBM_delta(S(i),K,r,T-t(i),sigma_imp,type); % buy delta shares at current price and hold them during [t,t+dt)
     borrow = delta*S(i)-portfolio(i); %use bank to borrow/deposit remaining/extra cash
     %store portfolio information (share holdings and cash balance)
     stock(i) = delta;
     cash(i) = (-1)*borrow;
-    %next option and portfolio prices based on stocks orice change 
-    S(i+1) = S(i) * exp((mu - 0.5*sigma_real^2)*dt + dW(i)); %update price path with using exact solution of GBM model
-    [call,put] = blsprice(S(i+1),K,r,T-t(i+1),sigma_imp); %exact option price for next time
-    if type == 0
-        option(i+1) = call;
-    else
-        option(i+1) = put;
-    end
-    %update portfolio value in the next step based on price change and r
+    %new option and portfolio prices based on stocks orice change 
+    option(i+1) = GBM_price(S(i+1),K,r,T-t(i+1),sigma_imp,type);
     portfolio(i+1) = delta*S(i+1)-exp(r*dt)*borrow;
     replication_error(i+1) = portfolio(i+1) - option(i+1); %track current error 
 end
@@ -109,8 +93,6 @@ if k == 1 %show specific data of first one only
 end
 end
 
-
- 
 if hedges == 1
     %% OPTION SUMMARY AND PAYOFF SUMMARY
     if type == 0
@@ -228,3 +210,42 @@ price = V(1);
 % price = exp(-r*T) * price;
 % delta = 0;
 end
+function S = GBM_path(S0,mu,sigma,T,N)
+%outputs N spot prices using GBM model every T/N units of time (exact)
+dt = T/N;
+dW = sigma*sqrt(dt)*randn(N,1); %precompute wiener increments
+S = zeros(N+1,1);
+S(1) = S0;
+for i=1:N
+    S(i+1) = exp((mu - 0.5*sigma^2)*dt + dW(i))*S(i);
+end
+end
+function D = GBM_delta(S,K,r,T,sigma,type)
+[dcall,dput] = blsdelta(S,K,r,T,sigma);
+    if type == 0 %european call
+        D = dcall;
+    end
+    if type == 1 %european put
+        D = dput;
+    end
+end
+function P = GBM_price(S,K,r,T,sigma,type)
+[pcall,pput] = blsprice(S,K,r,T,sigma);
+    if type == 0 %european call
+        P = pcall;
+    end
+    if type == 1 %european put
+        P = pput;
+    end
+end
+function S = OU_path(S0,mu,theta,sigma,T,N)
+%outputs N spot prices using OU model every T/N units of time (approx)
+dt = T/N;
+dW = sigma*sqrt(dt)*randn(N,1); %precompute wiener increments
+S = zeros(N+1,1);
+S(1) = S0;
+for i=1:N
+    S(i+1) = S(i)-theta*(S(i)-mu)*dt+sigma*dW(i);
+end
+end
+

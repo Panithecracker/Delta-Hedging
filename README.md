@@ -1,4 +1,4 @@
-# Hedging the risks of an option:
+# Hedging the risks of selling an option:
 In this project I investigated the insight behind the Black-Scholes-Merton formula: if you know the volatility of a stock then you can replicate the payoff of an option by a continuous rebalancing of a portfolio made up of the underlying stock and a risk-free bond. Therefore, to avoid arbitrage, the cost of the option must be that of the replication strategy.
 This precise idea blew me away when I first heard of it in class, so I wanted to further explore the link between the price and the associated strategy in action.
 

@@ -1,15 +1,16 @@
 # Hedging the risks of selling an option:
-In this project I investigated the insight behind the Black-Scholes-Merton formula: if you know the volatility of a stock then you can replicate the payoff of an option by a continuous rebalancing of a portfolio made up of the underlying stock and a risk-free bond. Therefore, to avoid arbitrage, the cost of the option must be that of the replication strategy.
+In this project I investigated the insight behind the Black-Scholes-Merton formula: if you know the volatility of a stock then you can replicate the payoff of any european style option by a continuous rebalancing of a portfolio made up of the underlying stock and a risk-free bond. Therefore, to avoid arbitrage, the cost of the option must be that of the replication strategy.
 This precise idea blew me away when I first heard of it in class, so I wanted to further explore the link between the price and the associated strategy in action.
 
 # Key assumptions
 The main assumptions of the Black-Scholes-Merton model for option pricing are :
-- The price of a stock is lognormal or equivalently, $dS = \mu Sdt+\sigma S dW$ 
+- The price of a stock follows a lognormal distribution or equivalently, $dS = \mu Sdt+\sigma S dW$
 - Riskfree rate $r$ and volatility $\sigma$ constant 
 - Arbitrarily high frequency trading is possible
 - No transaction costs: no fees nor bid/ask spread
+- Short selling is possible and fractional amounts of stock can be purchased/sold
 
-Despite these assumptions , I find its conclusions astonishing as it gives a systematic risk management strategy to limit the risks when selling an option and more generally has contributed to the creation of a wide variety of new financial instruments that all participants in the market can use and benefit from. 
+Despite these assumptions , I find its conclusions astonishing as it gives a systematic algorithm to limit the risks when selling an option and more generally has contributed to the creation of a wide variety of new financial instruments that all participants in the market can use and benefit from. 
 As Robert.C Merton puts it : "It gave us a prescription for how to produce them and this became an efficient production process... it opened the doors to not just dealing with options but to a whole array of financial innovations like the mortgage market... it has become a mainstay of how the whole industry works including central banks and other government agencies. None of these would work today without these complex computer models and the finance technologies and of course the data we have to collect in order to run them". Check the entire video: https://www.youtube.com/watch?v=3guNFc0Hf6M&t=1650s
 
 In this project, I analyzed the effects of relaxing the third assumption that is: only a finite amount of rebalancing can be done throughout the life of the option.

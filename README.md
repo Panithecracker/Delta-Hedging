@@ -1,21 +1,24 @@
 # Hedging the risks of selling an option:
-In this project I investigated the insight behind the Black-Scholes-Merton formula: if you know the volatility of a stock then you can replicate the payoff of any european style option by a continuous rebalancing of a portfolio made up of the underlying stock and a risk-free bond. Therefore, to avoid arbitrage, the cost of the option must be that of the replication strategy.
-This precise idea blew me away when I first heard of it in class, so I wanted to further explore the link between the price and the associated strategy in action.
+In this project I investigated the insight behind the Black-Scholes-Merton formula: if you know the volatility of a stock then you can replicate the payoff of any european style option by a continuous rebalancing of a portfolio made up of the underlying asset and zero coupon bonds. Therefore, to avoid arbitrage, the price of the option must be the same as the cost of setting up the simple portfolio.
+This precise idea blew me away when I first heard of it in class and skeptical about its truth, I set on to further explore the mathematics behind it and test the hedging strategy myself.
 
+Note that this file does not reflect the order in which I learned the theory and synthesizes the topics I studied to really understand the theory of option pricing (brownian motion, quadratic variation, Itos lemma, arbitrage, self financing portfolios, tree models, Feynmann Kac theorem, etc)
 # Key assumptions
 The main assumptions of the Black-Scholes-Merton model for option pricing are :
-- The price of a stock follows a lognormal distribution or equivalently, $dS = \mu Sdt+\sigma S dW$
-- Riskfree rate $r$ and volatility $\sigma$ constant 
-- Arbitrarily high frequency trading is possible
-- No transaction costs: no fees nor bid/ask spread
+
+- The price of a stock follows a lognormal distribution or equivalently, $dS = \mu Sdt+\sigma S dW$ where the volatility $\sigma$, is a constant 
+- Borrowing/Lending money is allowed over any period of time at a common and constant annualized rate of $100r$ % 
+- Arbitrarily high frequency trading is possible and instantaneous
+- There are no transaction costs: no broker fees nor bid/ask spread
 - Short selling is possible and fractional amounts of stock can be purchased/sold
 
-Despite these assumptions , I find its conclusions astonishing as it gives a systematic algorithm to limit the risks when selling an option and more generally has contributed to the creation of a wide variety of new financial instruments that all participants in the market can use and benefit from. 
+Despite these assumptions , I find its conclusions astonishing as it gives a systematic algorithm to manage the risks when selling any portfolio of european options and more generally has contributed to the creation of a wide variety of new financial instruments that all participants in the market can use and benefit from, either for pure speculation or for special management of their own business risks. 
 As Robert.C Merton puts it : "It gave us a prescription for how to produce them and this became an efficient production process... it opened the doors to not just dealing with options but to a whole array of financial innovations like the mortgage market... it has become a mainstay of how the whole industry works including central banks and other government agencies. None of these would work today without these complex computer models and the finance technologies and of course the data we have to collect in order to run them". Check the entire video: https://www.youtube.com/watch?v=3guNFc0Hf6M&t=1650s
 
-In this project, I analyzed the effects of relaxing the third assumption that is: only a finite amount of rebalancing can be done throughout the life of the option.
+In this project, I analyze the results of the hedging strategy when I remove the "arbitrary high frequency" assumption, that is: only a finite amount of rebalancing can be done throughout the life of the option.
 For this, I performed simulations of the hedging strategy for a European call option and visualized the statistical distribution of the replication error at maturity.
-For the details on the derivation of the BSM formula and its link to the replication strategy as well as other interesting information, check the contents of Columbia's Foundations of Financial Engineering course prepared by professor Martin Haugh : (https://martin-haugh.github.io/teaching/foundations-fe/)
+For some basic details on the derivation of the BSM formula and its link to the replication strategy as well as other interesting information, I enjoyed the contents of Columbia's Foundations of Financial Engineering course prepared by professor Martin Haugh : (https://martin-haugh.github.io/teaching/foundations-fe/)
+
 # Option replication results:
 In the first table I show graphically the accuracy of the replication strategy for two random stock paths, where the portfolio is rebalanced once a day. The specific parameters used for the simulations are $\sigma = 0.2, \mu = 0, r = 0.05, K = S0 = 100, T = 1$. I observed that the replication is not 100% exact, although remarkably close in both instances:
 | <img width="700" height="525" alt="S2" src="https://github.com/user-attachments/assets/73a5f99e-390b-41fa-9fa7-2d4e2916dee6"/> | <img width="700" height="525" alt="C2" src="https://github.com/user-attachments/assets/7ff19d16-31a1-4702-8b5f-34117fc9b6ca" /> |

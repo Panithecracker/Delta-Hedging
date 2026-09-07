@@ -3,6 +3,8 @@ In this project I investigated the insight behind the Black-Scholes-Merton formu
 This precise idea blew me away when I first heard of it in class and skeptical about its truth, I set on to further explore the mathematics behind it and test the hedging strategy myself.
 
 Note that this file does not reflect the order in which I learned the theory and synthesizes the topics I studied to really understand the theory of option pricing (brownian motion, quadratic variation, Itos lemma, arbitrage, self financing portfolios, tree models, Feynmann Kac theorem, etc)
+
+As I start the Msc in Computational Mathematical Finance at Edinburgh University, I hope to polish key mathematical results and learn how to price and hedge more complex products like interest rate derivatives under stochastic volatility or risk free rates and the presence of transaction costs.
 # Key assumptions
 The main assumptions of the Black-Scholes-Merton model for option pricing are :
 

@@ -4,7 +4,7 @@ This precise idea blew me away when I first heard of it in class and skeptical a
 
 Note that this file does not reflect the order in which I learned the theory and synthesizes the topics I studied to really understand the theory of option pricing (brownian motion, quadratic variation, Itos lemma, arbitrage, self financing portfolios, tree models, Feynmann Kac theorem, etc)
 
-As I start the Msc in Computational Mathematical Finance at Edinburgh University (https://study.ed.ac.uk/programmes/postgraduate-taught/894-computational-mathematical-finance#) details, I hope to learn how to price and hedge more complex products like interest rate derivatives and deal with more realistic properties like stochastic volatility and risk free rates, the presence of transaction costs and discontinuous underlying dynamics
+As I start the Msc in Computational Mathematical Finance at Edinburgh University (https://study.ed.ac.uk/programmes/postgraduate-taught/894-computational-mathematical-finance#), I hope to learn how to price and hedge more complex products like interest rate derivatives and deal with more realistic properties like stochastic volatility and risk free rates, the presence of transaction costs and discontinuous underlying dynamics
 # Key assumptions
 The main assumptions of the Black-Scholes-Merton model for option pricing are :
 

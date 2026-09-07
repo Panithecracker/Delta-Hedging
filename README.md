@@ -1,4 +1,4 @@
-# Hedging the risks of selling an option:
+# Hedging European options:
 In this project I investigated the insight behind the Black-Scholes-Merton formula: if you know the volatility of a stock then you can replicate the payoff of any european style option by a continuous rebalancing of a portfolio made up of the underlying asset and zero coupon bonds. Therefore, to avoid arbitrage, the price of the option must be the same as the cost of setting up the simple portfolio.
 This precise idea blew me away when I first heard of it in class and skeptical about its truth, I set on to further explore the mathematics behind it and test the hedging strategy myself
 
